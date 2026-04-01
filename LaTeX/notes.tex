@@ -1151,9 +1151,9 @@ We can use this partition to rearrange the standard factorization $\{1,\dots,N\}
   Suppose further that the $a_\ell N$ are integers for all $\ell$.   Then $t(N) \geq \alpha N$.
   \end{proposition}
 
-  Informally, ${\mathcal D}$ represents the factors that one removes (as greedily as possible) from the standard factorization $\{1,\dots,N\}$ of $N!$ to free up some prime factors, and $a_\ell$ is the proportion of elements in the resulting subfactorization that are to be multiplied by $\ell$ (again, in a greedy fashion) to (hopefully) bring the subfactorization into $t$-admissibility.  The condition \eqref{i-eq-1} asserts that enough primes are freed up by the first step to ``afford'' the second step, while \eqref{l-eq-1} is the assertion that the $a_\ell$ have enough mass at large $\ell$ to bring even the make even the smallest elements of the subfactorization $t$-admissible.
+  Informally, ${\mathcal D}$ represents the factors that one removes (as greedily as possible) from the standard factorization $\{1,\dots,N\}$ of $N!$ to free up some prime factors, and $a_\ell$ is the proportion of elements in the resulting subfactorization that are to be multiplied by $\ell$ (again, in a greedy fashion) to (hopefully) bring the subfactorization into $t$-admissibility.  The condition \eqref{i-eq-1} asserts that enough primes are freed up by the first step to ``afford'' the second step, while \eqref{l-eq-1} is the assertion that the $a_\ell$ have enough "mass" at large $\ell$ to make even the smallest elements of the subfactorization $t$-admissible.
 
-  \begin{proof}  Restricting \eqref{partition} to $[1,N]$ and multiplying, we obtain a factorization
+  \begin{proof}[Proof of \Cref{rearrange-crit}]  Restricting \eqref{partition} to $[1,N]$ and multiplying, we obtain a factorization
   $$ N! = \prod_{d \in {\mathcal D}} d^{|A_{d,{\mathcal D}} \cap [1,N/d]|} \times \prod \tuple$$
   where $\tuple$ is the multiset
   $$ \tuple \coloneqq \biguplus_{d \in {\mathcal D}} \left(A_{d,{\mathcal D}} \cap \left[1,\frac{N}{d}\right]\right).$$
@@ -1287,7 +1287,7 @@ Numerically\footnote{\url{https://github.com/teorth/erdos-guy-selfridge/blob/mai
 Once the weights were found, they were converted into rational numbers and the linear program was verified\footnote{\url{https://github.com/teorth/erdos-guy-selfridge/blob/main/src/dnup/verify.py}} in exact arithmetic, thus establishing that $t(N) \geq N/3$ for sufficiently large $N$.
 \end{proof}
 
-We do not explicitly compute a bound on $N$ which is necessary for the previous Proposition to hold because we expect it to be significantly worse than that obtained by the modified approximate factorization strategy later in \Cref{10^{11}}, and in particular, far worse than what would be necessary to link up with the calculations using the greedy method of \Cref{greedy-sec}.
+We do not explicitly compute a bound on $N$ which is necessary for the previous proposition to hold because we expect it to be significantly worse than that obtained by the modified approximate factorization strategy later in \Cref{10^{11}}, and in particular, far worse than what would be necessary to link up with the calculations using the greedy method of \Cref{greedy-sec}.
 However, we can use \Cref{rearrange-crit} to prove \Cref{main}(ii):
 \begin{proposition}\label{two-sevenths} Suppose $N\ne 56$.  Then $t_{2,3,5,7}(N) \ge \lfloor 2N/7\rfloor$.
 \end{proposition}
@@ -1360,8 +1360,8 @@ As a result, in the remainder of this proof we may assume that $N$ exceeds this 
 
 Suppose for contradiction that there is an $N/4$-admissible factorization of $N!$, where the tuple is formed by decomposing each $n \in \{1,\dots,N\}$ into the product $n=dm$ of a $3$-smooth part $d$ and a $3$-rough part $m$, and replacing $d$ by some other $3$-smooth number $\ell$.  If we let $a_\ell$ be the proportion of numbers that are multiplied by $\ell$, then to maintain balance we must have
   \begin{align*}
-    \sum_\ell a_\ell &= 1 \\
-    \sum_\ell \nu_2(\ell) a_\ell &= \frac{\nu_2(N!)}{N} \leq 1 \\
+    \sum_\ell a_\ell &= 1, \\
+    \sum_\ell \nu_2(\ell) a_\ell &= \frac{\nu_2(N!)}{N} \leq 1, \\
     \sum_\ell \nu_3(\ell) a_\ell &= \frac{\nu_3(N!)}{N} \leq \frac{1}{2}
   \end{align*}
   thanks to \eqref{legendre}, and since the $\sum_{k < \ell} a_k N$ terms that are multiplied by something less than $\ell$ must have the $m$ component at least $N/4\ell$, we also have
@@ -1381,14 +1381,14 @@ Suppose for contradiction that there is an $N/4$-admissible factorization of $N!
   \end{align*}
   where
   $$ \eps \coloneqq 1 -  
-c_2 - \frac{c_3}{2} - \sum_{\ell} w_\ell \sum_{d \in \N^{\langle 2,3 \rangle}: d < 4\ell} \left( \frac{1}{d} - \frac{1}{4\ell} \right)$$
+c_2 - \frac{c_3}{2} - \sum_{\ell} w_\ell \sum_{d \in \N^{\langle 2,3 \rangle}: d < 4\ell} \left( \frac{1}{d} - \frac{1}{4\ell} \right),$$
   $$ C \coloneqq \sum_\ell w_\ell \left(\frac{4}{3} \# \left\{ d \in \N^{\langle 2,3 \rangle}: d < 4\ell \right\} + 1\right).$$
  Thus, once one produces weights for which $\eps>0$, one obtains a contradiction for $N > C/\eps$.
   Numerical computation reveals that if one selects\footnote{These coefficients were discovered by applying a linear program to a finite truncation of the problem, choosing the truncation so as to optimize the threshold.} $c_2 = 2/32$, $c_3 = 3/32$, $w_1 = 2/32$, and $w_\ell = 1/32$ for all $3$-smooth $1 < \ell \leq 2^2 3^9$ with $\nu_2(\ell) \leq 2$, with $w_\ell=0$ otherwise, then  \eqref{ell-cond} holds for all $3$-smooth $\ell$ (note that this is automatic once $\nu_2(\ell)$ or $\nu_3(\ell)$ is large enough, so this is a finite check) with
 $$\eps = \frac{218038591}{4458050224128} > 0$$
 and
 $$ C = \frac{1559}{24}$$
-and one then we obtain the desired contradiction for $N > 1328148 = \lceil\frac{C}{\eps}\rceil$.
+and then we obtain the desired contradiction for $N > 1328148 = \lceil\frac{C}{\eps}\rceil$.
 
 As in \Cref{onethird-large}, we verified\footnote{\url{https://github.com/teorth/erdos-guy-selfridge/blob/main/src/dnup/one_fourth.py}} the linear programming certificate in exact arithmetic.
 However, in this case we note that the proof is fundamentally human-checkable.
@@ -1418,19 +1418,17 @@ Finally, we can recover a weak version of \Cref{main}(iv) with this method:
 \begin{proof}  We select the following parameters:
   \begin{itemize}
   \item A sufficiently small real $c_0>0$ (which can depend on $\alpha$);
-  \item A sufficiently large natural number $M$ (which can depend $c_0$, $\alpha$);
+  \item A sufficiently large natural number $M$ (which can depend on $c_0$, $\alpha$);
   \item A sufficiently large natural number $C_0$ (which can depend on $M$, $c_0$, $\alpha$);
   \item A sufficiently large prime $p_-$ (which can depend on $C_0$, $M$, $c_0$, $\alpha$); and
   \item A prime $p_+$ with $\log p_+ \asymp \log^2 \log p_-$.
   \end{itemize}
 Let ${\mathcal D}$ be the set of all numbers $d$ which are either of the form $2^m$ for $0 \leq m \leq M$, or $2^m p$ for $0 \leq m \leq M$ and $p_- \leq p \leq p_+$.  This is a downset, and the densities $\sigma_{d,{\mathcal D}}$ can be computed explicitly as
-$$ \sigma_{2^m,{\mathcal D}} = \frac{1}{2} \mu_+; \sigma_{2^m p,{\mathcal D}} = \frac{1}{2} \mu_p$$
+$$ \sigma_{2^m,{\mathcal D}} = \frac{1}{2} \mu_+; \qquad \sigma_{2^m p,{\mathcal D}} = \frac{1}{2} \mu_p$$
 for $0 \leq m < M$ and
-$$ \sigma_{2^M,{\mathcal D}} = \mu_+; \sigma_{2^M p,{\mathcal D}} = \mu_p,$$
+$$ \sigma_{2^M,{\mathcal D}} = \mu_+; \qquad \sigma_{2^M p,{\mathcal D}} = \mu_p,$$
 where
-$$ \mu_p \coloneqq \prod_{p_- \leq p' < p} \left( 1 - \frac{1}{p'} \right)$$
-and
-$$ \mu_+ \coloneqq \prod_{p_- \leq p' \leq p_+} \left( 1 - \frac{1}{p'} \right).$$
+$$ \mu_p \coloneqq \prod_{p_- \leq p' < p} \left( 1 - \frac{1}{p'} \right); \qquad \mu_+ \coloneqq \prod_{p_- \leq p' \leq p_+} \left( 1 - \frac{1}{p'} \right).$$
 The identity \eqref{sigma-id} is then equivalent to the telescoping identity
 \begin{equation}\label{telescope}
    \sum_{p_- \leq p \leq p_+} \frac{\mu_p}{p} + \mu_+ = 1.
@@ -1445,7 +1443,7 @@ We can now define the weights $a_\ell$ as follows:
 \item[(vi)] In all other cases, we set $\alpha_\ell = 0$.
 \end{itemize}
 
-By \Cref{asym-crit}, it suffices to verify the conditions \eqref{i-eq}, \eqref{l-eq}.  We begin with \eqref{i-eq}.  If $p$ is not equal to $2$ or in the range $[p_-,p_+]$, then both sides of \eqref{i-eq} vanish.  If $p$ is in $[p_-,p_+]$, then a routine computation shows that both sides are equal to $\mu_p$.  For $p=2$, the right-hand side can be simplified using \eqref{telescope} to
+By \Cref{asym-crit}, it suffices to verify the conditions \eqref{i-eq}, \eqref{l-eq}.  We begin with \eqref{i-eq}.  If $p$ is not equal to $2$ or is in the range $[p_-,p_+]$, then both sides of \eqref{i-eq} vanish.  If $p$ is in $[p_-,p_+]$, then a routine computation shows that both sides are equal to $\mu_p$.  For $p=2$, the right-hand side can be simplified using \eqref{telescope} to
 $$ \sum_{0 \leq m \leq M}^* \frac{1}{2} \frac{m}{2^m} = 1 - O\left( \frac{M}{2^M} \right)$$
 where the $*$ means that the term with $m=M$ is doubled (so $\sum_{0 \leq m \leq M}^* f(m) = \sum_{0 \leq m<M} f(m) + 2 f(M)$).  Meanwhile, the left-hand side can be computed to equal
 \begin{align*}
@@ -1462,9 +1460,9 @@ From Mertens' theorem (or \Cref{osc-lemma}) one has
 \end{equation}
 and similarly
 \begin{equation}\label{mertens-2}
-  \mu_+ = \frac{\log p_-}{\log p_+} \left( 1 + O\left( \frac{1}{\log^{10} p_+} \right) \right)
+  \mu_+ = \frac{\log p_-}{\log p_+} \left( 1 + O\left( \frac{1}{\log^{10} p_+} \right) \right).
 \end{equation}
-and \eqref{i-eq} for $p=2$ then follows from the choice of parameters after a brief calculation.
+\eqref{i-eq} for $p=2$ then follows from the choice of parameters after a brief calculation.
 
 It remains to verify \eqref{l-eq}.  We first consider the case $\ell < 2^{C_0} p_-$.  In this case, the left-hand side simplifies using \eqref{telescope} to
 $$ \sum_{m: 2^m > \ell} \frac{C_0 m}{2^m} \mu_+ + (1-\mu_+)$$
@@ -1490,7 +1488,7 @@ The left-hand side can be computed using \eqref{mertens} and the prime number th
 $$ \gg 2^{C_0} \frac{\log p_-}{\log^2 p_+} \frac{\log (2+\ell/p_+)}{\ell}.$$
 By \eqref{mertens} and \Cref{osc-lemma}, the right-hand side may be bounded by
 $$ \ll (\log p_-) \sum_{m=0}^\infty \int_{p_-}^{p_+} \min\left(\frac{1}{2^m t}, \frac{1}{\ell}\right)\ \frac{dt}{\log^2 t}.$$
-We can perform the $m$ summation and bound this by
+We can perform the summation over $m$ and bound this by
 $$ \ll \frac{\log p_-}{\ell} \int_{p_-}^{p_+} \log\left(2 + \frac{\ell}{t}\right)\ \frac{dt}{\log^2 t},$$
 and the claim then follows from a routine computation.
 
