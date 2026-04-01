@@ -959,8 +959,8 @@ It is easy to check using \eqref{ftoa} that the weights $w_p \coloneqq \frac{\lo
 \begin{proof} We introduce the weights
   $$ 
 w_p \coloneqq  \begin{cases} 
-  \frac{\log p}{\log t} & p  \leq \frac{t}{\lfloor \sqrt{t} \rfloor} \\
-  \frac{\log p}{\log t} - \frac{\log \frac{\lceil t/p \rceil}{t/p}}{\log t} = 1 - \frac{\log \lceil t/p \rceil}{\log t} & p  > \frac{t}{\lfloor \sqrt{t} \rfloor}.
+  \frac{\log p}{\log t}, & p  \leq \frac{t}{\lfloor \sqrt{t} \rfloor}, \\
+  \frac{\log p}{\log t} - \frac{\log \frac{\lceil t/p \rceil}{t/p}}{\log t} = 1 - \frac{\log \lceil t/p \rceil}{\log t}, & p  > \frac{t}{\lfloor \sqrt{t} \rfloor}.
 \end{cases}
 $$
 Clearly the $w_p$ are non-negative.  It will suffice to verify the conditions \eqref{pj}, \eqref{hyp-low}.  If $j \in J_{t,N}$ contains no prime factor $p > \frac{t}{\lfloor \sqrt{t} \rfloor}$, then from \eqref{ftoa} we have
@@ -1004,7 +1004,7 @@ In practice, \Cref{upper-crit} gives quite good upper bounds on $N$, especially 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{factors.png}
-  \caption{A histogram of an optimal factorization of $N!$ for $N=43632$, demonstrating that $t(N) = N/3+1 = 14545$.  Of the $N$ factors, most ($\num{32147}$) of them are of the form $p \lceil t/p \rceil$ for $p > \frac{t}{\lfloor \sqrt{t} \rfloor}$, thus directly contributing to the left-hand side of \Cref{upper-crit}.  (The factors arising from very large primes are lie to the right of the displayed graph, as a long tail of the histogram.)  The remaining $\num{11485}$ factors stay close to $t(N)$, with the largest being $\num{14941}$.
+  \caption{A histogram of an optimal factorization of $N!$ for $N=43632$, demonstrating that $t(N) = N/3+1 = 14545$.  Of the $N$ factors, most ($\num{32147}$) of them are of the form $p \lceil t/p \rceil$ for $p > \frac{t}{\lfloor \sqrt{t} \rfloor}$, thus directly contributing to the left-hand side of \Cref{upper-crit}.  (The factors arising from very large primes lie to the right of the displayed graph, as a long tail of the histogram.)  The remaining $\num{11485}$ factors stay close to $t(N)$, with the largest being $\num{14941}$.
   }\label{fig-factor}
   \end{figure}
   
@@ -1013,7 +1013,7 @@ We can now prove the upper bound portion of \Cref{main}(iv):
 
   \begin{proposition}\label{upper-bound}  For large $N$, one has
     $$ \frac{t(N)}{N} \leq \frac{1}{e} - \frac{c_0}{\log N} - \frac{c_1 + o(1)}{\log^2 N}$$
-    where
+    where $c_0$ is given by \eqref{c0-def} and $c_1$ is given by
     \begin{align}
       c'_1 &\coloneqq \frac{1}{e} \int_0^1 f_e(x) \log \frac{1}{x}\ dx = 0.3702015\dots \label{c1p-def}\\
       c''_1 &\coloneqq \sum_{k=1}^\infty \frac{1}{k}  \log\left( \frac{e}{k} \left\lceil \frac{k}{e} \right\rceil \right) = 1.679578996\dots\label{c1pp-def}\\
@@ -1027,9 +1027,10 @@ We discuss the numerical evaluation of these constants in \Cref{c0-app}.
   $$\frac{t(N)}{N} = \frac{1}{e} - \frac{c_0}{\log N} - \frac{c_1 + o(1)}{\log^2 N}$$
 as $N \to \infty$.
     
-    \begin{proof}  We apply \Cref{upper-crit} with
+    \begin{proof}[Proof of \Cref{upper-bound}]
+    We apply \Cref{upper-crit} with
       $$ t \coloneqq \frac{1}{e} - \frac{c_0}{\log N} - \frac{c_1-\eps}{\log^2 N}$$
-    for a given small constant $\eps>0$.  From Taylor expansion of the logarithm and the Stirling approximation \eqref{stirling} one sees that
+    for a given small constant $\eps>0$.  From the Taylor expansion of the logarithm and the Stirling approximation \eqref{stirling} one sees that
     $$ \log N! - N \log t = ec_0 \frac{N}{\log N} + (ec_1 - \frac{1}{2} e^2 c_0^2 - e\eps+o(1)) \frac{N}{\log^2 N}$$
     so it will suffice to establish the lower bound
     \begin{equation}\label{targ-sum}
@@ -1054,14 +1055,14 @@ $$  \int_{1/\log^3 N}^1 f_{N/t}(x)\ dx
 \geq  ec_0 + \frac{ec_0 c''_1 - e^2 c_0^2 - e\eps + o(1)}{\log N}.$$
 By performing a rescaling by $N/et = 1 + \frac{ec_0+o(1)}{\log N}$, the left-hand side may be written as
 $$ \left(1 - \frac{ec_0+o(1)}{\log N}\right) \int_{N/et\log^3 N}^{N/et}
-\left\lfloor \frac{N/et}{x} \right\rfloor \log\left(ex \left\lceil \frac{1}{ex} \right\rceil \right) $$
+\left\lfloor \frac{N/et}{x} \right\rfloor \log\left(ex \left\lceil \frac{1}{ex} \right\rceil \right)\ dx$$
 so it will suffice to show that
 $$
 \int_{N/et\log^3 N}^{N/et}
 \left\lfloor \frac{N/et}{x} \right\rfloor \log\left(ex \left\lceil \frac{1}{ex} \right\rceil \right)\ dx \geq ec_0 + \frac{ec_0 c''_1 - e\eps + o(1)}{\log N}.$$
 From \eqref{c0-def}, \eqref{falpha-bound} we have
-$$ \int_{1/\log^2 N}^1 \left\lfloor \frac{1}{x} \right\rfloor \log\left(ex \left\lceil \frac{1}{ex} \right\rceil \right) = ec_0 - \frac{o(1)}{\log N}$$
-it suffices to show that
+$$ \int_{1/\log^2 N}^1 \left\lfloor \frac{1}{x} \right\rfloor \log\left(ex \left\lceil \frac{1}{ex} \right\rceil \right) = ec_0 - \frac{o(1)}{\log N},$$
+so it suffices to show that
 $$
 \int_{1/log^2 N}^{N/et}
 \left(\left\lfloor \frac{N/et}{x} \right\rfloor - \left\lfloor \frac{1}{x} \right\rfloor\right) \log\left(ex \left\lceil \frac{1}{ex} \right\rceil \right)\ dx \geq \frac{ec_0 c'' - e\eps + o(1)}{\log N}.$$
@@ -1099,7 +1100,7 @@ and so it suffices to show that
 $$ \left(1 - \frac{2}{\sqrt{N/e}}\right) \int_{1/e}^1 f_e(x)\ dx \geq
 (4 - 2 \log 2) \frac{E(N)}{N}
 + \frac{\log(2\pi N) \log N}{2N} + \frac{\log N}{12N^2}.$$
-The right-hand side is increasing in $N$ and the left-hand side is decreasing for $N \geq 5000$, so it suffices to verify this claim for $N=5000$; but this is a routine calculation (with plenty of room to spare; cf., \Cref{fig2}).
+The right-hand side is increasing in $N$ and the left-hand side is decreasing for $N \geq 5000$, so it suffices to verify this claim for $N=5000$; but this is a routine calculation (with plenty of room to spare; see \Cref{fig2}).
 \end{proof}
 
 \begin{figure}
