@@ -2306,18 +2306,18 @@ where
 \end{equation}
 and
 \begin{align*}
-  \eps_0(x) &\coloneqq \frac{\sqrt{x}}{8\pi} \log x(\log x - 3)\\
-  \eps_1(x) &\coloneqq 1.12494 \times 10^{-10}\\
-  \eps_2(x) &\coloneqq 9.39 (\log^{1.515} x) \exp(-0.8274\sqrt{\log x})\\
-  \eps_3(x) &\coloneqq 0.026 (\log^{1.801} x) \exp(-0.1853 (\log^{3/5} x) (\log\log x)^{-1/5})
+  \eps_0(x) &\coloneqq \frac{\sqrt{x}}{8\pi} \log x(\log x - 3),\\
+  \eps_1(x) &\coloneqq 1.12494 \times 10^{-10},\\
+  \eps_2(x) &\coloneqq 9.39 (\log^{1.515} x) \exp(-0.8274\sqrt{\log x}),\text{ and}\\
+  \eps_3(x) &\coloneqq 0.026 (\log^{1.801} x) \exp(-0.1853 (\log^{3/5} x) (\log\log x)^{-1/5}).
 \end{align*}
 From using the $\eps_2$ term, it is clear that
 $$ \tilde E(x) \ll x \exp(-c \sqrt{\log x})$$
-for some absolute constant $c>0$; and by using the $\eps_0, \eps_1$ term and routine calculations one can show that 
+for some absolute constant $c>0$; and by using the $\eps_0$ and $\eps_1$ terms and routine calculations one can show that
 $$ \tilde E(x) \leq E(x)$$
 for all $x \geq 1423$.
 
-Observe that $\tilde E$ is monotone non-decreasing. Thus by \Cref{integ-lemma}, to show \eqref{bsharp} will suffice to show that
+Observe that $\tilde E$ is monotone non-decreasing. Thus by \Cref{integ-lemma}, to show \eqref{bsharp}, it will suffice to show that
 $$ \sum_{p \leq x} \log p = x - \sqrt{x} + O_{\leq}(\tilde E(x))
   = \int_0^x \left(1-\frac{2}{\sqrt{t}}\right)\ dt + O_{\leq}(\tilde E(x))$$
 for all $x \geq 1423$.
