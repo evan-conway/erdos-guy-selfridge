@@ -369,7 +369,7 @@ This project was initially conceived as a single-author manuscript by Terence Ta
 \item Boris Alexeev: Formal Analysis, Investigation, Methodology, Software, Validation, Writing -- review \& editing.
 \item Evan Conway: Formal Analysis, Investigation, Software.
 \item Matthieu Rosenfeld: Software.
-\item Andrew Sutherland: Formal Analysis, Investigation, Methodology, Software, Validation, Writing -- review \& editing.
+\item Andrew V. Sutherland: Formal Analysis, Investigation, Methodology, Software, Validation, Writing -- review \& editing.
 \item Terence Tao: Conceptualization, Formal Analysis, Methodology, Project Administration, Visualization, Writing -- original draft, Writing -- review \& editing.
 \item Markus Uhr: Formal Analysis, Software.
 \item Kevin Ventullo: Software.
@@ -547,7 +547,7 @@ We remark that the accuracy in \eqref{bv-exact}, \eqref{pix} in particular is on
 
 \section{Greedy algorithms}\label{greedy-sec}
 
-Recall that $t(N)$ can be interpreted as the largest $t$ for which one has $M(N,t) \geq N$. Because of this, any algorithm that can produce lower bounds $M$ on $M(N,t)$ can also produce lower bounds on $t(N)$, as follows:
+Recall that $t(N)$ can be interpreted as the largest $t$ for which one has $M(N,t) \geq N$, where $M(N,t)$ denotes the cardinality of the largest $t$-admissible subfactorization of $N$. Because of this, any algorithm that can produce lower bounds $M$ on $M(N,t)$ can also produce lower bounds on $t(N)$, as follows:
 
 \begin{itemize}
   \item[Step 0:] Start with a heuristic lower bound $t$ for $t(N)$.
@@ -558,7 +558,7 @@ Recall that $t(N)$ can be interpreted as the largest $t$ for which one has $M(N,
 
 One can similarly use an algorithm that produces upper bounds for $M(N,t)$ to produce upper bounds for $t(N)$.
 
-The algorithm described above is imprecisely specified, because it requires one to make some implementation decisions about how to select the parameter $t$ at various steps of the algorithm. In particular, having some accurate heuristics (or ``hints'') about what the correct value of $t(N)$ should be (possibly based on the outcomes of previous stages of the algorithm) can greatly accelerate its performance.  But regardless of this variability in speed, the $M(N,t)$ algorithm will in practice produce a certificate (e.g., an explicit subfactorization of $N!$) that can be quickly and independently verified by a separate computer program to confirm the lower bound on $t(N)$.  So the output of such imprecisely specified algorithms can at least be independently confirmed, if not reproduced exactly.  In particular, a lack of reproducibility is not a major concern when verifying a specific bound on $t(N)$, such as $t(N) \geq N/3$, so long as independently verifiable proof certificates (such as an $N/3$-admissible subfactorization of $N!$ of length at least $N$) are generated.
+The algorithm described above is imprecisely specified, because it requires one to make some implementation decisions about how to select the parameter $t$ at various steps of the algorithm. In particular, having some accurate heuristics (or ``hints'') about what the correct value of $t(N)$ should be (possibly based on the outcomes of previous stages of the algorithm) can greatly accelerate its performance.  But regardless of this variability in speed, the $M(N,t)$ algorithm will in practice produce a certificate (e.g., an explicit subfactorization of $N!$) that can be quickly and independently verified by a separate computer program to confirm the lower bound on $t(N)$.  So the output of such imprecisely specified algorithms can at least be independently confirmed, if not reproduced exactly.  In particular, a lack of reproducibility does not prevent verification of a specific bound on $t(N)$, such as $t(N) \geq N/3$, so long as independently verifiable proof certificates (such as an $N/3$-admissible subfactorization of $N!$ of length at least $N$) are generated.
 
 We therefore turn to the question of how to algorithmically obtain good upper and lower bounds on $M(N,t)$.  In this section we will discuss greedy methods to obtain lower bounds on this quantity; in the next section we will discuss how linear programming and integer programming methods can also be used to obtain both upper and lower bounds on $M(N,t)$.
 
@@ -573,11 +573,11 @@ The following \textit{greedy algorithm} produces reasonably good lower bounds on
 This procedure clearly halts in finite time and produces a $t$-admissible subfactorization of $N!$.
 The length of this subfactorization gives a lower bound on $M(N,t)$ that can be used to obtain lower bounds on $t(N)$ as discussed above.  For instance, applying this procedure with $N=9$, $t=3$ produces the $3$-admissible subfactorization
 \[
-\bigl\{7 \times 1,\ 5 \times 1,\ 3 \times 1,\ 3 \times 1,\ 3 \times 1,\ 3 \times 1,\ 2 \times 2,\ 2 \times 2,\ 2 \times 2 \bigr\},
+\bigl\{7 \cdot 1,\ 5 \cdot 1,\ 3 \cdot 1,\ 3 \cdot 1,\ 3 \cdot 1,\ 3 \cdot 1,\ 2 \cdot 2,\ 2 \cdot 2,\ 2 \cdot 2 \bigr\},
 \]
 which recovers the bound $M(9,3) \geq 9$ (and hence $t(9) \geq 3$) from \Cref{nine}, albeit with a slightly different subfactorization, in which the $8$ is replaced by $4$.
 
-The greedy approach works well for small $N$, producing the exact value of $t(N)$ for $N \leq 79$, but the quality of the bounds on $t(N)$ it produces declines as $N$ grows; see \Cref{fig-zoom}.  Its performance is also respectable (though not optimal) for medium $N$; for instance, when $N=3 \times 10^5$ and $t=N/3$, it establishes the lower bound $M(N,t) \geq N+372$, which is close to the exact value $M(N,t) = N+455$ we able establish using the linear programming methods of the next section; see \eqref{mnt} and \eqref{mnt-lower}.
+The greedy approach works well for small $N$, producing the exact value of $t(N)$ for $N \leq 79$, but the quality of the bounds on $t(N)$ it produces declines as $N$ grows; see \Cref{fig-zoom}.  Its performance is also respectable (though not optimal) for medium $N$; for instance, when $N=3 \times 10^5$ and $t=N/3$, it establishes the lower bound $M(N,t) \geq N+372$, which is close to the exact value $M(N,t) = N+455$ we establish using the linear programming methods of the next section; see \eqref{mnt} and \eqref{mnt-lower}.
 
 To handle the larger values of $N$ needed to establish Theorem~\ref{main}(iii) for $N\in [ 8\times 10^4, 10^{11}]$, and also for the broader range $N\in [67425,10^{14}]$ that comfortably overlaps regions in which we may apply other methods, we now consider how to efficiently implement Steps 1 and 2 of the greedy algorithm outlined above.  Let $p_1\ge p_2\ge \ldots \ge 2$ be the prime factors of $N>1$ listed with multiplicity in non-increasing order, and let $m_ip_i\ge t$ be the factor of $N!$ chosen by the greedy algorithm for the prime $p_i$ on input $t < N/2$.  Our implementation of the greedy algorithm is based on the following observations:
 
@@ -589,7 +589,7 @@ To handle the larger values of $N$ needed to establish Theorem~\ref{main}(iii) f
 
 Observation (a) allows us to efficiently handle large $p_i$, observation (b) enables an $O(N^{1+\epsilon})$ running time, and observation (c) allows us to more efficiently handle small $p_i$, which turns out to be the main bottleneck of the simple greedy algorithm sketched above.
 
-In section \ref{sec:fast-greedy} we describe a variant of the greedy algorithm that produces slightly weaker lower bounds on $M(N,t)$, but yields a power savings in the running time: we show that one can achieve an $O(N^{\nicefrac{2}{3}+\epsilon})$ running time asymptotically. The complexity of our implementation of this faster variant is actually $O(N^{\nicefrac{3}{4}+\epsilon})$, but it is faster than the asymptotically superior approach in the range of $N$ we are most concerned with.  While one might suppose that an algorithm whose output is a factorization of $N!$ into $N$ factors would require $\Omega(N)$ time (and $\Omega(N\log N)$ space for the output), we can compress this factorization using tuples of the form $(n,m,p_{\min},p_{\max})$ to represent $n$ occurrences of factors $mp$ for each prime $p\in [p_{\min},p_{\max}]$; for example, the tuple $(\pi(N)-\pi(t-1),1,t,N)$ encodes all factors $p_i\ge t$ in a single tuple.  This compression allows us to encode certificates of a subfactorization in $O(N^{\nicefrac{1}{2}+\epsilon})$ space that can be verified in $O(N^{\nicefrac{2}{3}+\epsilon})$ time, which is an important consideration for large $N$ (e.g. $N\approx 10^{14}$).
+In Section \ref{sec:fast-greedy} we describe a variant of the greedy algorithm that produces slightly weaker lower bounds on $M(N,t)$, but yields a power savings in the running time: we show that one can achieve an $O(N^{\nicefrac{2}{3}+\epsilon})$ running time asymptotically. The complexity of our implementation of this faster variant is actually $O(N^{\nicefrac{3}{4}+\epsilon})$, but it is faster than the asymptotically superior approach in the range of $N$ we are most concerned with.  While one might suppose that an algorithm whose output is a factorization of $N!$ into $N$ factors would require $\Omega(N)$ time (and $\Omega(N\log N)$ space for the output), we can compress this factorization using tuples of the form $(n,m,p_{\min},p_{\max})$ to represent $n$ occurrences of factors $mp$ for each prime $p\in [p_{\min},p_{\max}]$; for example, the tuple $(\pi(N)-\pi(t-1),1,t,N)$ encodes all factors $p_i\ge t$ in a single tuple.  This compression allows us to encode certificates of a subfactorization in $O(N^{\nicefrac{1}{2}+\epsilon})$ space that can be verified in $O(N^{\nicefrac{2}{3}+\epsilon})$ time, which is an important consideration for large $N$ (e.g. $N\approx 10^{14}$).
 
 \subsection{Implementation of the greedy algorithm}
 We assume $1< N/4< t < N/2$ throughout the rest of this section and fix $M \approx N^{\nicefrac{1}{2}}$.
@@ -620,9 +620,9 @@ We can improve the running time by enumerating primes up to $N^{\nicefrac{2}{3}}
 
 In practice, it is more common to compute $\pi(x)$ using the $O(x^{\nicefrac{2}{3}+\epsilon})$ algorithm described in \cite{deleglise-rivat,lagarias-miller-odlyzko}, for which high-performance implementations are widely available.  In this case the optimal asymptotic approach is to sieve primes up to $N^{3/4}$, yielding an $O(N^{\nicefrac{3}{4}+\epsilon})$ algorithm. In our implementation we used a  slightly smaller sieving bound that more evenly balances the time spent sieving primes versus counting them in the range $N\le 10^{14}$ via the \texttt{primesieve}~\cite{walisch-primesieve} and \texttt{primecount} \cite{walisch-primecount} libraries used in our implementation.
 
-If we precompute the prime factorizations of the positive integers $m\le t/M$, we can compute \eqref{eq:rval} for all primes $p \le M$ in $O(N^{\nicefrac{1}{2}+\epsilon})$ time (and verify our assumption that it is nonnegative).  This is the all the information we will need in the next phase of the algorithm, which partitions the remaining $M$-smooth part of $N!$ into factors of size at least $t$.
+If we precompute the prime factorizations of the positive integers $m\le t/M$, we can compute \eqref{eq:rval} for all primes $p \le M$ in $O(N^{\nicefrac{1}{2}+\epsilon})$ time (and verify our assumption that it is nonnegative).  This is all the information we will need in the next phase of the algorithm, which partitions the remaining $M$-smooth part of $N!$ into factors of size at least $t$.
 
-We now recall observations (b) and (c) above, that the $m_i$ are nondecreasing and $p_i$-smooth.    This means that we can  precompute a table of $M$-smooth integers $m\le t$ and process them in increasing order as we consider decreasing primes $p_i$, thereby obtaining a quasilinear running time $O(N^{1+\epsilon})$. At each step the algorithm will determine the largest exponent $e$ such that $(m_i p_i)^e$ divides $N!/\tuple$, so will have $m_i=m_{i+1}=\cdots = m_{i+n-1}$ and $p_i=p_{i+1}=\cdots = p_{i+n-1}$, with either $p_{i+n}<p_i$ or $m_{i+n} > m_i$ (possibly both).
+We now recall observations (b) and (c) above, that the $m_i$ are nondecreasing and $p_i$-smooth.    This means that we can  precompute a table of $M$-smooth integers $m\le t$ and process them in increasing order as we consider decreasing primes $p_i$, thereby obtaining a quasilinear running time $O(N^{1+\epsilon})$. At each step the algorithm will determine the largest exponent $e$ such that $(m_i p_i)^e$ divides $N!/\tuple$, so we will have $m_i=m_{i+1}=\cdots = m_{i+n-1}$ and $p_i=p_{i+1}=\cdots = p_{i+n-1}$, with either $p_{i+n}<p_i$ or $m_{i+n} > m_i$ (possibly both).
 The running time is then dominated by the time to precompute the prime factorizations of all the candidate $m_i$.  The additional constraint on the prime factors of the $m_i$ noted in (c) reduces the number of candidate cofactors $m$ we need to store in memory by a logarithmic factor.  This does not change the $O(N^{1+\epsilon})$ complexity bound, but it is significant in the practical range of interest, where it reduces the memory required by up to a factor of about 40 for $N\le 10^{11}$.  But we can handle much larger values of $N$ by modifying the algorithm as described in the next subsection.
 
 \subsection{A fast variant of the greedy algorithm}\label{sec:fast-greedy}
@@ -653,14 +653,14 @@ We can do slightly better by using the value of the bound on $M(N,t)$ determined
 \[
 \exp\left(\frac{B}{N}\log t\right),
 \]
-where $M(N,t)\ge B$ is the bound proved by the greedy algorithm on input $t$,  subject to the constraint the this value must lie in the interval $[t_{\rm low},t_{\rm high})$
+where $M(N,t)\ge B$ is the bound proved by the greedy algorithm on input $t$,  subject to the constraint that this value must lie in the interval $[t_{\rm low},t_{\rm high})$
 (we use $(3t_{\rm low}+t_{\rm high})/4$ if it is below the interval and $(t_{\rm low}+3t_{\rm high})/4$ if it is above).  We then update $t_{\rm low}$ and $t_{\rm high}$ as above.
 In practice this heuristic method converges about twice as fast as a standard bisection search.
 
 We now consider the more challenging problem of computing $t_1(N)$.  It is not clear that this function can be computed in quasi-linear time.  In the worst case our approach potentially involves $O(N)$ calls to the greedy algorithm, whereas our solution to (a) uses only $O(\log N)$.  This limits the range of its applicability, but it is easy to parallelize the search, and this makes it feasible to compute $t_1(N)$ for $N$ as large as $10^9$ (but $N=10^{14}$ is surely out of reach).
 
 To compute $t_1(N)$ we first use our solution to problem (a) to establish a lower bound on $t_1(N)\ge t_0(N)$.  To obtain an upper bound, we use the first phase of the greedy algorithm to compute the number $B_1$ of factors $m_ip_i$ divisible by primes $p_i\ge M\approx N^{1/2}$, along with the remaining factor $R=N!/\tuple$ expressed in terms of its valuation at primes $p < M$ via \eqref{eq:rval}.
-We may then take $B_1 + \lfloor \log R / \log t\rfloor$ as an upper bound on the number of factors the greedy algorithm could produce in the best possible case. Note that increasing $t$ can only decrease this upper bound, so we can use a bisection search to find the least $t$ for which this upper bound is less than $N/3$, which is then a strict upper bound on $t_1(N)$; 
+We may then take $B_1 + \lfloor \log R / \log t\rfloor$ as an upper bound on the number of factors the greedy algorithm could produce in the best possible case. Note that increasing $t$ can only decrease this upper bound, so we can use a bisection search to find the least $t$ for which this upper bound is less than $N/3$, which is then a strict upper bound on $t_1(N)$.
 
 Computing the lower and upper bounds on $t_1(N)$ involves only $O(\log N)$ calls to (the first phase of) the greedy algorithm and can be done quickly.  But the interval determined by these lower and upper bounds is typically large and appears to grow linearly with $N$.  We cannot apply a bisection search because there will typically be many $t$ in this interval for which the greedy algorithm produces more than $N$ factors that are interspersed with $t$ for which this is not the case.  Lacking a better alternative, we use an exhaustive search (which can easily be run in parallel on multiple cores) to find the largest such $t$ between our upper and lower bounds for which the greedy algorithm outputs at least $N/3$ factors, which gives us the value of $t_1(N)$.
 
@@ -668,17 +668,17 @@ Computing the lower and upper bounds on $t_1(N)$ involves only $O(\log N)$ calls
 To establish \Cref{main}(iii) for $67425 \leq N \leq 10^{14}$ we may proceed as follows:
 \begin{enumerate}
 \item[Step 0:] Let $N=67425$.
-\item[Step 1:] While $N\le 10^6$, compute $t_1(N)$ via (b) above using the standard greedy algorithm, verify that $t_1(N) > \lceil N/3\rceil$, and replace $N$ by $3t_1(N)$.
+\item[Step 1:] While $N\le 10^6$, compute $t_1(N)$ via problem (b) above using the standard greedy algorithm, verify that $t_1(N) > \lceil N/3\rceil$, and replace $N$ by $3t_1(N)$.
 \item[Step 2:] While $N\le 10^{14}$, compute $t\in [t_0(N),t_1(N)]$ via (a) above using the fast variant of the greedy algorithm, verify that $t_1(N) > \lceil N/3\rceil$, and replace $N$ by $3t_1(N)$.
 \end{enumerate}
 The GitHub repository \cite{github} associated to this paper contains lists of the pairs $(N,t)$ that arise from the procedure above, 223 pairs for Step~1 and 336 pairs for Step~2, which can be used to quickly verify its success by invoking the greedy algorithm for each pair from Step~1, and the fast variant of the greedy algorithm for each pair from Step~2, and verifying in each case that a subfactorization of $N!$ with at least $N/3$ factors is produced.  The script \url{https://github.com/teorth/erdos-guy-selfridge/blob/main/src/fastegs/verifyhints.sh} performs this verification, which takes much less time (under a minute) than it does to run the procedure above.
 
-It thus remains to establish \Cref{main}(iii) in the regime $43632 \leq N < 67425$ and $N > 10^{14}$, and to show that $t(N)<N/3$ for $N=43631$.
+It thus remains to establish \Cref{main}(iii) in the region $43632 \leq N < 67425$ and $N > 10^{14}$, and to show that $t(N)<N/3$ for $N=43631$.
 
       
 \begin{table}[htp!]
   \centering
-  \begin{tabular}{|c|c|c|c|c|c|}
+  \begin{tabular}{|c|c|c|c|c|r|}
   \hline
 \rule{0pt}{11pt}  $N$ & $t(N)_-$ & Fast heuristic & Time (s) & Standard exhaustive & Time (s) \\
   \hline
