@@ -275,11 +275,8 @@ for an explicit constant $c_1=0.75554808\dots$; see \Cref{upper-bound}.
 
 For future reference, we observe the simple bounds
 \begin{equation}\label{falpha-bound}
- \begin{split}
-   0 \leq f_\alpha(x) &\leq \frac{1}{x} \log \frac{\nicefrac{1}{\alpha x}+1}{\nicefrac{1}{\alpha x}}\\
-&= \frac{1}{x} \log\left( 1 + \alpha x \right) \\
-&\leq \alpha
-\end{split}
+   0 \leq f_\alpha(x) \leq \frac{1}{x} \log \frac{\nicefrac{1}{\alpha x}+1}{\nicefrac{1}{\alpha x}}
+= \frac{1}{x} \log\left( 1 + \alpha x \right) \leq \alpha
 \end{equation}
 for all $x>0$; in particular, $f_\alpha$ is a bounded function.  It however has an oscillating singularity at $x=0$; see \Cref{fig-mean}.
 
@@ -294,10 +291,10 @@ were established, which were enough to recover \eqref{t1}, \eqref{Tbound}, and \
 As one might expect, the proof of \Cref{main} proceeds by a combination of both theoretical analysis and numerical calculations.  Our main tools to obtain upper and lower bounds on $t(N)$ can be summarized as follows (and in \Cref{cases-table}):
 
 \begin{itemize}
-  \item In \Cref{greedy-sec}, we discuss \emph{greedy algorithms} to construct subfactorizations, that provide quickly computable, though suboptimal, lower bounds on $t(N)$ for small, medium, and moderately large values;
-  \item In \Cref{linprog-sec}, we present a \emph{linear programming} (and \emph{integer programming}) method that provides quite accurate upper and lower bounds on $t(N)$ for small and medium values of $N$, and which we apply in \Cref{upper-sec} to establish a general upper bound (\Cref{upper-crit}) on $t(N)$ that can be used to obtain \Cref{main}(i);
+  \item In \Cref{greedy-sec}, we discuss \emph{greedy algorithms} to construct subfactorizations, that provide quickly computable, though suboptimal, lower bounds on $t(N)$ for small, medium, and moderately large values.
+  \item In \Cref{linprog-sec}, we present a \emph{linear programming} (and \emph{integer programming}) method that provides quite accurate upper and lower bounds on $t(N)$ for small and medium values of $N$, and which we apply in \Cref{upper-sec} to establish a general upper bound (\Cref{upper-crit}) on $t(N)$ that can be used to obtain \Cref{main}(i).
   \item In \Cref{rearrange-sec}, we extend the \emph{rearrangement approach} from \cite{guy-selfridge} to give computer-assisted proofs of \Cref{main}(ii), \Cref{main}(iii) for sufficiently large $N$, and \Cref{main}(v).  We also give an analytic proof of \eqref{t1}.
-  \item In \Cref{accounting-sec}, we introduce an \emph{accounting equation} linking the ``$t$-excess'' of a subfactorization with its ``$p$-surpluses'' at various primes, which provides an alternate proof of \Cref{upper-crit}, and also is the starting point for the modified factorization technique discussed below;
+  \item In \Cref{accounting-sec}, we introduce an \emph{accounting equation} linking the ``$t$-excess'' of a subfactorization with its ``$p$-surpluses'' at various primes, which provides an alternate proof of \Cref{upper-crit}, and also is the starting point for the modified factorization technique discussed below.
   \item In \Cref{approx-sec}, we give \emph{modified approximate factorization} strategy, which provides lower bounds on $t(N)$, that become asymptotically quite efficient.
 \end{itemize}
 
@@ -331,8 +328,10 @@ As one might expect, the proof of \Cref{main} proceeds by a combination of both 
 \end{table}
 
 The final approach is significantly more complicated than the other four, but gives the most efficient lower bounds in the asymptotic limit $N \to \infty$.  The key idea is to start with an approximate factorization
-$$ N! \approx \left(\prod_{j \in I} j\right)^A$$
-for some relatively small natural number $A$ (e.g., $A = \lfloor \log^2 N \rfloor$) and a suitable set $I$ of natural numbers greater than or equal to $t$; there is some freedom to select parameters here, and we will take $I$ to be the natural numbers in $(t, t(1+\sigma)]$ that are $3$-rough (coprime to $6$), where $t$ is the target lower bound for $t(N)$ we wish to establish, and $\sigma \coloneqq \frac{3N}{tA}$ is chosen to bring the number of terms in the approximate factorization close to $N$.  With this choice of $I$, this product contains approximately the right number of copies of $p$ for medium-sized primes $p$; but it has the ``wrong'' number of copies of large primes, and is also constructed to avoid the ``tiny'' primes $p=2,3$.  One then performs a number of alterations to this approximate factorization to correct for the ``surpluses'' or ``deficits'' at various primes $p>3$, using the supply of available tiny primes $p=2,3$ as a sort of ``liquidity pool'' to efficiently reallocate primes in the factorization.  A key point will be that the incommensurability of $\log 2$ and $\log 3$ (i.e., the irrationality of $\log 3/\log 2$) means that the $3$-smooth numbers (numbers of the form $2^n 3^m$) are asymptotically dense (in logarithmic scale), allowing for other factors to be exchanged for $3$-smooth factors with little loss\footnote{The weaker results alluded to in \Cref{old} only used the prime $2$ as a supply of ``liquidity'', and thus encountered inefficiencies due to the inability to ``make change'' when approximating another factor by a power of two.}.
+\begin{equation}\label{approx_factor}
+   N! \approx \left(\prod_{j \in I} j\right)^A
+\end{equation}
+for some relatively small natural number $A$ (e.g., $A = \lfloor \log^2 N \rfloor$) and a suitable set $I$ of natural numbers greater than or equal to $t$; there is some freedom to select parameters here, and we will take $I$ to be the natural numbers in $(t, t(1+\sigma)]$ that are $3$-rough (coprime to $6$), where $t$ is the target lower bound for $t(N)$ we wish to establish, and $\sigma \coloneqq \frac{3N}{tA}$ is chosen to bring the number of terms in the approximate factorization close to $N$.  With this choice of $I$, the product in \eqref{approx_factor} contains approximately the right number of copies of $p$ for medium-sized primes $p$; but it has the ``wrong'' number of copies of large primes, and is also constructed to avoid the ``tiny'' primes $p=2,3$.  One then performs a number of alterations to this approximate factorization to correct for the ``surpluses'' or ``deficits'' at various primes $p>3$, using the supply of available tiny primes $p=2,3$ as a sort of ``liquidity pool'' to efficiently reallocate primes in the factorization.  A key point will be that the incommensurability of $\log 2$ and $\log 3$ (i.e., the irrationality of $\log 3/\log 2$) means that the $3$-smooth numbers (numbers of the form $2^n 3^m$) are asymptotically dense (in logarithmic scale), allowing for other factors to be exchanged for $3$-smooth factors with little loss\footnote{The weaker results alluded to in \Cref{old} only used the prime $2$ as a supply of ``liquidity'', and thus encountered inefficiencies due to the inability to ``make change'' when approximating another factor by a power of two.}.
 
 \subsection{Linear and integer programming solvers}
 
@@ -385,7 +384,7 @@ AVS is supported by Simons Foundation Grant 550033.  TT is supported by NSF gran
 
 In this paper the natural numbers $\N=\{1,2,3,\dots\}$ will start at $1$.
 
-We use the usual asymptotic notation $X = O(Y)$, $X \ll Y$, or $Y \gg X$ to denote an inequality of the form $|X| \leq CY$ for some absolute constant $C$; if we need this constant to depend on additional parameters, we will indicate this by subscripts, thus for instance $O_M(Y)$ denotes a quantity bounded in magnitude by $C_M Y$ for some $C_M$ depending on $M$.  We also write $X \asymp Y$ for $X \ll Y \ll X$. For effective estimates, we will use the more precise notation $O_{\leq}(Y)$ to denote any quantity whose magnitude is bounded by exactly at most $Y$. We also use $O_{\leq}(Y)^+$ to denote a quantity of size $O_{\leq}(Y)$ that is also non-negative, that is to say it lies in the interval $[0,Y]$.  We also use $o(X)$ to denote any quantity bounded in magnitude by $c(N) X$, for some $c(N)$ that goes to zero as $N \to \infty$.
+We use the usual asymptotic notation $X = O(Y)$, $X \ll Y$, or $Y \gg X$ to denote an inequality of the form $|X| \leq CY$ for some absolute constant $C$; if we need this constant to depend on additional parameters, we will indicate this by subscripts, thus for instance $O_M(Y)$ denotes a quantity bounded in magnitude by $C_M Y$ for some $C_M$ depending on $M$.  We also write $X \asymp Y$ for $X \ll Y \ll X$. For effective estimates, we will use the more precise notation $O_{\leq}(Y)$ to denote any quantity whose magnitude is bounded by exactly at most $Y$. We also use $O_{\leq}(Y)^+$ to denote a quantity of size $O_{\leq}(Y)$ that is also non-negative, that is to say it lies in the interval $[0,Y]$.  We also use $o(X)$ to denote any quantity bounded in magnitude by $c(N) X$, for some $c(N)$ that goes to zero as $N \to \infty$. We also use $X = \Omega(Y)$ to denote an inequality of the form $|X| \geq CY$ for some absolute constant $C$. 
 
 If $S$ is a statement, we use $1_S$ to denote its indicator, thus $1_S=1$ when $S$ is true and $1_S=0$ when $S$ is false.  If $x$ is a real number, we use $\lfloor x \rfloor$ to denote the greatest integer less than or equal to $x$, and $\lceil x \rceil$ to be the least integer greater than or equal to $x$.
 
@@ -463,7 +462,7 @@ and
 \end{equation}
 where
 \begin{equation}\label{kappastar-2-def}
-\kappa^{(2)}_{L,\gamma} \coloneqq \left(\frac{\log \sqrt{12}}{(1-\gamma)\log 2} - 1\right) \log(12L) + \frac{\kappa_L\log \sqrt{12}}{(1-\gamma) \log 2}
+\kappa^{(2)}_{L,\gamma} \coloneqq \left(\frac{\log \sqrt{12}}{(1-\gamma)\log 2} - 1\right) \log(12L) + \frac{\kappa_L\log \sqrt{12}}{(1-\gamma) \log 2},
 \end{equation}
 \begin{equation}\label{kappastar-3-def}
   \kappa^{(3)}_{L,\gamma} \coloneqq \left(\frac{\log \sqrt{12}}{(1-\gamma)\log \sqrt{3}} - 1\right) \log(12L) + \frac{\kappa_L\log \sqrt{12}}{(1-\gamma)\log \sqrt{3}}.
@@ -544,7 +543,7 @@ and the lower bound
 One can replace all occurrences of $E(x)$ here by the classical error term $O(x \exp(-c \sqrt{\log x}))$ for some absolute constant $c>0$ (in which case the $\frac{2}{\sqrt{t}}$ type terms can be absorbed into the error term).
 \end{lemma}
 
-We remark that the accuracy in \eqref{bv-exact}, \eqref{pix} in particular is on par with what would be provided by the Riemann hypothesis, as long as $x$ is not too large (e.g., $x \leq 10^{18}$).  The other estimates in this lemma are not quite as precise, but still adequate for our applications.  The error term $E(x)$ can be improved somewhat for large $x$ (see \eqref{etil-def}), but this simplified version will suffice for our analysis (in particular, the contribution of the second term in \eqref{tilde-e} will be negligible for our applications).  We make the easy remark that $E(x)$ is non-decreasing in $x$, while $E(x)/x$ is non-increasing.
+We remark that the accuracy in \eqref{bv-exact}, \eqref{pix} in particular is on par with what would be provided by the Riemann hypothesis, as long as $x$ is not too large (e.g., $x \leq 10^{18}$).  The other estimates in this lemma are not quite as precise, but are still adequate for our applications.  The error term $E(x)$ can be improved somewhat for large $x$ (see \eqref{etil-def}), but this simplified version will suffice for our analysis (in particular, the contribution of the second term in \eqref{tilde-e} will be negligible for our applications).  We make the easy remark that $E(x)$ is non-decreasing in $x$, while $E(x)/x$ is non-increasing.
 
 \section{Greedy algorithms}\label{greedy-sec}
 
