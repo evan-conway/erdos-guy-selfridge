@@ -1574,7 +1574,7 @@ The analysis of the algorithm is now captured by the following proposition.
 
 \begin{proposition}[Repairing an approximate factorization]\label{repair}  Let $N, K$ be natural numbers, and let $1 \leq t \leq N$ be an additional parameter obeying the conditions
 \begin{equation}\label{conditions}
-    \frac{t}{K} \geq \sqrt{N}; \quad \frac{t}{K^2} \geq K \geq 5.
+    \frac{t}{K} \geq \sqrt{N}; \qquad \frac{t}{K^2} \geq K \geq 5.
 \end{equation}
 We also assume that there are additional parameters $\kappa_* > 0$ and $0 \leq \gamma_2, \gamma_3 < 1$, such that there exist $3$-smooth numbers
 \begin{equation}\label{tlip} 
@@ -1582,7 +1582,7 @@ We also assume that there are additional parameters $\kappa_* > 0$ and $0 \leq \
 \end{equation}
 such that
 \begin{equation}\label{nm}
-  2m_2 \leq \gamma_2 n_2; \quad n_3 \leq 2\gamma_3 m_3.
+  2m_2 \leq \gamma_2 n_2; \qquad n_3 \leq 2\gamma_3 m_3.
 \end{equation}
 We define the ``norm'' of a pair $n,m$ of real numbers by the formula
 $$ \| (n,m) \|_\gamma \coloneqq \max\left( \frac{n-2\gamma_2 m}{1-\gamma_2}, \frac{2m-\gamma_3 n}{1-\gamma_3} \right).$$
@@ -1648,7 +1648,7 @@ We let $\tuple^{(1)}$ be the multiset formed after completing both Step (a) and 
 \item[(A)] Since the elements of $\tuple^{(0)}$ are at most $(t/K)^2$, all the elements removed in Step (a) are of the form $mp$ where $m \leq t/K$.
 \item[(B)] For each large prime $p$ considered in Step (b),  one has $\nu_p(N!) = \lfloor N/p \rfloor$ by \eqref{legendre} and \eqref{conditions}, while $\lceil t/p \rceil \leq K \leq t/K$ (again by \eqref{conditions}).  
 \end{itemize}
-From this, we see that $\tuple^{(1)}$ is automatically $t$-admissible, and in balance at any large prime $p > t/K$:
+From this, we see that $\tuple^{(1)}$ is automatically $t$-admissible, and is in balance at any large prime $p > t/K$:
 $$ \nu_p\left(\frac{N!}{\prod \tuple^{(1)}}\right) = 0.$$
 For medium primes $K < p_1 \leq t/K$, one can have some increase in the $p_1$-surplus coming from Step (a), which is described by \eqref{A-def}:
 $$ \nu_{p_1}\left(\frac{N!}{\prod \tuple^{(1)}}\right) = \nu_{p_1}\left(\frac{N!}{\prod \tuple^{(0)}}\right) + NA_{p_1}.$$
@@ -1659,7 +1659,7 @@ In particular, we have from \eqref{alpha1-def}, \eqref{alpha2-def} and the trian
 \frac{1}{N} \left\|\left( \nu_2\left(\prod \tuple^{(1)}\right), \nu_3\left(\prod \tuple^{(1)}\right)\right)\right\|_\gamma \leq \alpha_1 + \alpha_2.
 \end{equation}
 
-Each element removed in Step (a) reduces the $t$-excess, while each element $p \lceil t/p \rceil$ added in Step (b) increases the $t$-excess by $\log \frac{\lceil t/p \rceil}{t/p}$, so each large prime $t/K < p \leq N$ contributes a net of $\lfloor \frac{N}{p} \rfloor \log \frac{\lceil t/p \rceil}{t/p} = f_{N/t}(p/N)$ to the $t$-excess.  Thus by \eqref{delta1-def}, \eqref{delta2-def} we have
+Each element removed in Step (a) reduces the $t$-excess, while each element $p \lceil t/p \rceil$ added in Step (b) increases the $t$-excess by $\log \frac{\lceil t/p \rceil}{t/p}$, so each large prime $t/K < p \leq N$ contributes a total of $\lfloor \frac{N}{p} \rfloor \log \frac{\lceil t/p \rceil}{t/p} = f_{N/t}(p/N)$ to the $t$-excess.  Thus by \eqref{delta1-def}, \eqref{delta2-def} we have
 \begin{equation}\label{excess-1} 
   \frac{1}{N} \excess_t(\tuple^{(1)}) \leq \delta_1 + \delta_2.
 \end{equation}
@@ -1677,7 +1677,7 @@ With these observations in mind, we perform the following modifications to the m
 $p \lceil t/p \rceil^{\langle 2,3 \rangle}_{4.5}$ to $\tuple^{(1)}$ as per observation (D), $\nu_p(\prod N!/\tuple^{(1)})$ times, in order to eliminate all such surpluses at medium primes.
 \item[(d')] If there are $p$-surpluses $\nu_p(\prod N!/\tuple^{(1)}) > 0$ at some small primes $3 < p \leq K$, we multiply all these primes together, then apply the greedy algorithm to factor them into products $m$ in the range $t/K^2 < m \leq t/K$, plus at most one exceptional product in the range $1 < m \leq t/K$.  For each of these $m$, add $m \lceil t/m \rceil^{\langle 2,3 \rangle}_{4.5}$ to $\tuple^{(1)}$ as per observation (D), to eliminate all such surpluses at small primes.
 \end{itemize}
-Call the multiset formed from $\tuple^{(1)}$ formed as the outcome of applying Steps (c), (d), (d') as $\tuple^{(2)}$.  The product of all the primes arising in Step (d') has logarithm equal to
+Let $\tuple^{(2)}$ be the multiset formed from $\tuple^{(1)}$ as the outcome of applying Steps (c), (d), and (d').  The product of all the primes arising in Step (d') has logarithm equal to
 $$ \sum_{3 < p_1 \leq K} \left|\nu_{p_1}\left( \frac{N!}{\prod \tuple^{(1)}} \right) \right|_{\log p_1,0} = \sum_{3 < p_1 \leq K} \left|\nu_p\left( \frac{N!}{\prod \tuple^{(0)}} \right) \right|_{\log p_1,0}$$
 and hence the number of non-exceptional $m$ arising in (d') is at most
 $$ \sum_{3 < p_1 \leq K} \left|\nu_p\left( \frac{N!}{\prod \tuple^{(0)}} \right) \right|_{\frac{\log p_1}{\log(t/K^2)},0}.$$
@@ -1703,10 +1703,10 @@ and
 $$\frac{1}{N\log \sqrt{12}} \left( \log t + \kappa_{**} \right)$$
 so by \eqref{alpha-1}, \eqref{alpha3-def}, \eqref{alpha4-def}, \eqref{alpha5-def}, \eqref{alpha6-def}, and the triangle inequality we have
 \begin{equation}\label{alpha-2} 
-\frac{1}{N} \| (\nu_2(\prod \tuple^{(2)}), \nu_3(\prod \tuple^{(3)})) \|_\gamma \leq \sum_{i=1}^6 \alpha_i.
+\frac{1}{N} \| (\nu_2(\prod \tuple^{(2)}), \nu_3(\prod \tuple^{(2)})) \|_\gamma \leq \sum_{i=1}^6 \alpha_i.
 \end{equation}
 
-By construction, the multiset $\tuple^{(2)}$ is $t$-admissible, and in balance at all small, medium, and large primes $p > 3$; thus $N!/\prod \tuple^{(2)} = 2^n 3^m$ for some integers $n,m$.  From \eqref{alpha-2}, \eqref{alpha-cond}, \eqref{legendre}, \eqref{alpha7-def} we have
+By construction, the multiset $\tuple^{(2)}$ is $t$-admissible, and is in balance at all small, medium, and large primes $p > 3$; thus $N!/\prod \tuple^{(2)} = 2^n 3^m$ for some integers $n,m$.  From \eqref{alpha-2}, \eqref{alpha-cond}, \eqref{legendre}, \eqref{alpha7-def} we have
 \begin{align*}
 n - 2\gamma_2 m &= \nu_2(N!) - 2\gamma_2 \nu_3(N!) - \left(\nu_2\left(\prod \tuple^{(2)}\right) - 2\gamma_2 \nu_3\left(\prod \tuple^{(2)}\right)\right) \\
 &\geq \nu_2(N!) - 2\gamma_2 \nu_3(N!) - N (1-\gamma_2) \sum_{i=1}^6 \alpha_i \\
@@ -2049,7 +2049,7 @@ From \eqref{delta2-def} and \Cref{osc-lemma}, and the monotonicity of $E(N)/N$, 
   &\leq \frac{0.919785}{\log(N_0/3K)}  + \frac{1159.795}{\log(N_0/3K)}  \frac{E(N_0)}{N_0} \\
   &\leq 0.504735 \delta
 \end{align*}
-for all\footnote{Despite the seemingly large numerator, the second term is in fact negligible in the regime $N \geq N_0$, due to the square root type decay in $E(N)/N$.} $N \geq N_0$.  For $N \geq 10^{70}$ we may replace $N_0$ by $10^{70}$ and obtain the significantly better bound
+for all\footnote{Despite the seemingly large numerator, the second term is in fact negligible for $N \geq N_0$, due to the square root type decay in $E(N)/N$.} $N \geq N_0$.  For $N \geq 10^{70}$ we may replace $N_0$ by $10^{70}$ and obtain the significantly better bound
 $$ \delta_2 \leq 0.060410 \delta.$$
 
 From \Cref{delta3-alpha3-bound} and \eqref{pi-upper} one has
@@ -2084,18 +2084,16 @@ $$ \alpha_3 \leq 0.361121$$
 for all $N \geq N_0$.
 From \eqref{alpha6-def} we have
 \begin{align*}
-   \alpha_6 &\leq \frac{\log(N_0/3) + \kappa_{**}}{N_0 \log \sqrt{12}} \\
-   &\leq 3 \times 10^{-10}
+   \alpha_6 &\leq \frac{\log(N_0/3) + \kappa_{**}}{N_0 \log \sqrt{12}} \leq 3 \times 10^{-10}
 \end{align*}
 for all $N \geq N_0$, and similarly from \eqref{alpha7-def} we have
 \begin{align*}
-\alpha_7 &\leq \max\left( \frac{\log(2N_0)}{(1-\gamma_2)N_0\log 2},  \frac{\log(3N_0)}{(1-\gamma_3)N_0\log \sqrt{3}}\right) \\
-&\leq 6 \times 10^{-10}
+\alpha_7 &\leq \max\left( \frac{\log(2N_0)}{(1-\gamma_2)N_0\log 2},  \frac{\log(3N_0)}{(1-\gamma_3)N_0\log \sqrt{3}}\right) \leq 6 \times 10^{-10}
 \end{align*}
 for all $N \geq N_0$.
 so the contribution of these two terms are negligible.
 
-Conveniently\footnote{Even if this were not the case, the quantities $\delta_4,\alpha_4$ should be viewed as lower order terms, and are far smaller than several of the other $\delta_i$ or $\alpha_i$ for typical choices of parameters.}, the choice of parameters $A,K$ ensure that there are no primes in the range
+Conveniently\footnote{Even if this were not the case, the quantities $\delta_4,\alpha_4$ should be viewed as lower order terms, and are far smaller than several of the other $\delta_i$ or $\alpha_i$ for typical choices of parameters.}, the choice of parameters $A,K$ ensures that there are no primes in the range
 $$ 293 = K < p \leq K(1+\sigma) = K(1+\sigma)=306.952\dots$$
 and thus
 $$ \delta_4=\alpha_4 = 0$$
@@ -2112,14 +2110,14 @@ and lower bound it by
 \begin{align*}
    B_{p_1} &\geq \sum_{m \leq K} \nu_{p_1}(m) \sum_{k: a_{k,m} < b_{k,m}} \frac{k\left(1-\frac{2}{\sqrt{a_{k,m} N}}\right)}{\log(N (a_{k,m}+b_{k,m})/2)}  (a_{k,m}-b_{k,m}) - 2\frac{E(N b_{k,m})}{N \log(N a_{k,m})}
 \end{align*}
-We caution here that while the upper bound for $B_{p_1}$ is monotone decreasing in $N$, the lower bound does not have a favorable monotonicity property, particularly as it will be used when \emph{subtracting} copies of $B_{p_1}$ rather than \emph{adding} then.
+We caution here that while the upper bound for $B_{p_1}$ is monotone decreasing in $N$, the lower bound does not have a favorable monotonicity property, particularly as it will be used when \emph{subtracting} copies of $B_{p_1}$ rather than \emph{adding} them.
 
 From the monotonicity of the upper bound, one can use \eqref{alpha2-def} to calculate that 
 $$ \alpha_2 \leq 0.269878$$
 for all $N \geq N_0$.  For \eqref{delta7-def}, subtraction is involved, and one must proceed with more caution.  For $N=N_0$, one has
 $$ \delta_7 \leq 0.11359 \delta.$$
 For $N \geq 10^{70}$, we simply discard the negative terms here and obtain the bound
-$$ \delta_7 \leq \frac{\kappa_{4.5} \log \sqrt{12}}{\log(10^{70}/3)}  \leq 0.02212 \delta$$
+$$ \delta_7 \leq \frac{\kappa_{4.5} \log \sqrt{12}}{\log(10^{70}/3)}  \leq 0.02212 \delta.$$
 
 As for the $A_{p_1}$, we know from \eqref{ap1-vanish} that this vanishes unless $3 < p_1 \leq K(1+\sigma)$.  From \eqref{ap1-small} and \Cref{osc-lemma} one has the upper bound
 \begin{align*}
@@ -2133,13 +2131,10 @@ A_{p_1} &\geq \sum_{m \leq K(1+\sigma)}^* \frac{A \nu_{p_1}(m)\left(1-\frac{2}{\
 \end{align*}
 Again, the upper bound is monotone decreasing in $N$, but the lower bound does not have a favorable monotonicity. At $N=N_0$, one can calculate using these bounds and \eqref{delta5-def}, \eqref{alpha5-def} to obtain
 \begin{align*}
-\delta_5 &\leq 0.06203 \delta \\
-\alpha_5 &\leq 0.31418
+\delta_5 &\leq 0.06203 \delta; \qquad \alpha_5 \leq 0.31418
 \end{align*}
 which, when combined with the previous bounds, gives
-$$ \sum_{i=1}^8 \delta_i  \leq 0.9740 \delta$$
-and 
-$$ \sum_{i=1}^7 \alpha_i \leq 0.9452$$
+$$ \sum_{i=1}^8 \delta_i  \leq 0.9740 \delta; \qquad \sum_{i=1}^7 \alpha_i \leq 0.9452$$
 at $N=N_0$, thus verifying \eqref{delta-cond}, \eqref{alpha-cond} in those cases.
 
 For $N \geq 10^{70}$, we use the triangle inequality to crudely upper bound
@@ -2148,12 +2143,11 @@ and
 $$ \alpha_5 \leq \frac{1}{\log \sqrt{12}} \sum_{3 < p_1 \leq K}  \frac{(\log K^2+\kappa_{**})\log p_1}{\log(t/K^2)} A_{p_1} + (\log p_1 + \kappa_{**}) B_{p_1}.$$
 The bounds available for the right-hand side are now monotone in $N$, and one can calculate that
 \begin{align*}
-  \delta_5 &\leq 0.077301 \delta \\
-  \alpha_5 &\leq 0.184975
+  \delta_5 &\leq 0.077301 \delta; \qquad \alpha_5 \leq 0.184975
   \end{align*}
 for $N \geq 10^{70}$. This is better than the previous bound for $\alpha_5$.  For $\delta_5$, the bound is slightly worse, but this is more than compensated for by the improved bounds on $\delta_2$, $\delta_7$, and \eqref{delta-cond}, \eqref{alpha-cond} can be verified here with significant room to spare.
 
-This completes the proof of \Cref{main}(iii) (and hence \Cref{main}(ii)) in the cases $N=N_0$ and $N \geq 10^{70}$.  It remains to cover the intermediate range $N_0 < N \leq 10^{70}$.  Here we adopt the perspective of interval arithmetic.  If $N$ is constrained to a given interval, such as $[10^{11}, 5 \times 10^{11}]$, we can use the worst-case upper and lower bounds for $A_{p_1}, B_{p_1}$ to obtain conservative upper bounds on the most delicate quantities
+This completes the proof of \Cref{main}(iii) (and hence \Cref{main}(ii)) in the cases $N=N_0$ and $N \geq 10^{70}$.  It remains to cover the intermediate range $N_0 < N \leq 10^{70}$.  Here we adopt the perspective of interval arithmetic.  If $N$ is restricted to a given interval, such as $[10^{11}, 5 \times 10^{11}]$, we can use the worst-case upper and lower bounds for $A_{p_1}, B_{p_1}$ to obtain conservative upper bounds on the most delicate quantities
 $\delta_5, \delta_7, \alpha_2, \alpha_5$, thus potentially verifying the conditions \eqref{delta-cond}, \eqref{alpha-cond} simultaneously for all $N$ in such an interval.  As it turns out, there is enough room to spare in these estimates, particularly for large $N$, that this strategy works using only a small number of intervals; specifically, by considering $N$ in the intervals
 $$ [10^{11}, 5 \times 10^{11}]; \quad [5 \times 10^{11}, 10^{14}]; \quad [10^{14}, 10^{20}]; \quad [10^{20}, 10^{70}]$$
 one can check that such bounds are sufficient to verify \eqref{delta-cond}, \eqref{alpha-cond} in these cases.  This now verifies \Cref{main}(ii), (iii) for all $N \geq 10^{11}$.
