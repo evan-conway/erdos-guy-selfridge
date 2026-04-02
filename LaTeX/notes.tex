@@ -726,7 +726,7 @@ $9 \times 10^8$ & $\num{316560601}$ & $t(N)_- - \num{3137853}$ & 0.153 & $t(N)_-
 
 \section{Linear programming}\label{linprog-sec}
 
-It turns out that linear programming and integer programming methods are quite effective at upper and lower bounding $M(N,t)$.  The starting point is the following integer program interpretation of $M(N,t)$. For any $t,N$, let $J_{t,N}$ be the collection of all $j \geq t$ that divide $N!$, and which do not have any proper factor $j' < j$ that is also greater than or equal to $t$.  For instance,
+It turns out that linear programming and integer programming methods are quite effective at bounding $M(N,t)$, both from above and below.  The starting point is the following integer program interpretation of $M(N,t)$. For any $t,N$, let $J_{t,N}$ be the collection of all $j \geq t$ that divide $N!$, and which do not have any proper factor $j' < j$ that is also greater than or equal to $t$.  For instance,
 $$ J_{4,5} = \{ 4, 5, 6, 9 \}.$$ 
 
 \begin{proposition}[Integer programming description of $t(N)$]\label{fip}  For any $N,t \geq 1$, $M(N,t)$ is the maximum value of
@@ -740,7 +740,7 @@ where the $m_j$ are non-negative integers subject to the constraints
 for all primes $p \leq N$.
 \end{proposition}
 
-\begin{proof}  If $m_j, j \in J_{t,N}$ are non-negative numbers obeying \eqref{constraints}, then clearly
+\begin{proof}  If $m_j, j \in J_{t,N}$ are non-negative integers obeying \eqref{constraints}, then clearly
   \begin{equation}\label{mj-subfac} 
     \prod_{j \geq t} j^{m_j}
   \end{equation}
@@ -760,7 +760,7 @@ which can be improved slightly to
 \end{equation}
 since $M(N,t)$ is an integer.  We refer to these bounds as the \emph{linear programming upper bounds}.
 
-The quantity $M_\R(N,t)$ can be computed by standard linear programming methods; in particular, upper bounds on $M_\R(t,N)$ can be obtained by solving a dual linear program involving some weights $w_p, p \leq N$ that obey constraints for each $j \in J_{t,N}$.  In fact we can restrict attention to those constraints with $j$ in the range $t \leq j \leq N$:
+The quantity $M_\R(N,t)$ can be computed by standard linear programming methods; in particular, upper bounds on $M_\R(N,t)$ can be obtained by solving a dual linear program involving some weights $w_p, p \leq N$ that obey constraints for each $j \in J_{t,N}$.  In fact we can restrict attention to those constraints with $j$ in the range $t \leq j \leq N$:
 
 \begin{proposition}[Dual description of $M_\R(N,t)$]\label{dual-desc} For any $N,t \geq 1$ with $t \leq N/2$, $M_\R(N,t)$ is the minimum value of
 \begin{equation}\label{hyp}
@@ -795,7 +795,7 @@ Now let $m_j, j \in J_{t,N}$ be non-negative reals obeying \eqref{constraints}. 
 $$ \sum_{j \in J_{t,N}} m_j  \leq \sum_{j \in J_{t,N}} m_j \sum_{p \leq N} w_p \nu_p(j) \leq \sum_{p \leq N} w_p \nu_p(N!)$$
 and hence \eqref{hyp} is an upper bound for $M_\R(N,t)$.
 
-In the converse direction, we need to locate weakly increasing non-negative weights $w_p$ obeying \eqref{pj} for $t \leq j \leq N$ for which
+In the opposite direction, we need to locate weakly increasing non-negative weights $w_p$ obeying \eqref{pj} for $t \leq j \leq N$ for which
 \begin{equation}\label{wpm} 
   \sum_{p \leq N} w_p \nu_p(N!) = M_\R(N,t).
 \end{equation}
@@ -812,14 +812,14 @@ $$  p_2^{\lfloor N/p_2\rfloor} \geq 3^{\lfloor \sqrt{2N} \rfloor} \geq \frac{N}{
 for all $N$ (here we use that $3^k \geq \frac{(k+1)^2}{4}$ for $k \geq 1$).  Thus in all cases we have $j/p_1 \geq N/2 \geq t$, contradicting the hypothesis that $j$ has no proper factor that is at least $t$.
 \end{proof}
 
-\Cref{dual-desc} allows for a fast method to compute $M_\R(N,t)$ by a linear program.  In practice, we have found that even if we drop the explicit constraint \eqref{wp-decrease} that the $w_p$ are weakly decreasing (or equivalently, if we return to the original primal problem of optimizing \eqref{mj-sum} for real $m_j \geq 0$ obeying \eqref{constraints}, but now with $j$ restricted to $t \leq j \leq N$), the optimal weights $w_p$ produced by the resulting linear program will be weakly decreasing anyway, although we could not prove this empirically observed fact rigorously.  For instance, when $N = 3 \times 10^5$ and $t = N/3$, this linear program produces non-decreasing weights which certify that
+\Cref{dual-desc} allows for a fast method to compute $M_\R(N,t)$ by a linear program.  In practice, we have found that even if we drop the explicit constraint \eqref{wp-decrease} that the $w_p$ are weakly decreasing (or equivalently, if we return to the primal problem of optimizing \eqref{mj-sum} for real $m_j \geq 0$ obeying \eqref{constraints}, but now with $j$ restricted to $t \leq j \leq N$), the optimal weights $w_p$ produced by the resulting linear program will be weakly decreasing anyway, although we could not prove this empirically observed fact rigorously.  For instance, when $N = 3 \times 10^5$ and $t = N/3$, this linear program produces non-decreasing weights which certify that
 $$ M_\R(N,t) = N + 445.83398\dots$$
 and hence by \eqref{lp-upper}
 \begin{equation}\label{mnt}
   M(N,t) \leq N + 445
 \end{equation}
 for this choice of $N,t$.  In fact, as discussed later in this section, we know that equality holds in this particular case.  For $N \leq 10^4$, we found that the linear programming upper bound on $t(N)$ is tight except for
-$N=155,765,1528,1618,1619,2574,2935,3265,5122,5680,9633$, in which case integer programming was needed to precisely compute $t(N)$.  The values of $t(N)$ thus computed are  plotted in \Cref{fig-long}.
+$N=155$, $765$, $1528$, $1618$, $1619$, $2574$, $2935$, $3265$, $5122$, $5680$, and $9633$, for which integer programming was needed to precisely compute $t(N)$.  The values of $t(N)$ thus computed are  plotted in \Cref{fig-long}.
 
 The linear programming upper bound is sufficiently tight to establish that $t(N)<N/3$ for $N=43631$, which proves that the threshold $43632$ of \Cref{main}(iii) is best possible.
 The dual certificate for this computation\footnote{\url{https://github.com/teorth/erdos-guy-selfridge/blob/main/src/python/verification/prove43631.py}} was verified in exact arithmetic.
@@ -846,7 +846,7 @@ The floor+residuals method is fast and highly accurate for small and medium $N$ 
 \begin{itemize}
   \item The method computes $t(N)$ exactly for all $N \leq 600$, with the sole exception of $N=155$; see \Cref{fig-zoom}.  When $N=155$, the floor+residuals method provides a subfactorization that certifies $t(155) \geq 45$, while the linear programming upper bound \eqref{lp-upper} gives $t(155) \leq 46$.  Integer programming can then be deployed to confirm $t(155)=45$.
   \item The method establishes $t(N) \geq N/3$ for all $43632 \leq N \leq 4.5 \times 10^4$; see \Cref{fig-surplus}.
-  \item The method also verifies the lower bound $t(N)\geq N/3$ lower bound for $N=41006$, while the linear programming upper bound \eqref{lp-upper} shows that $t(N) \geq N/3$ fails for all smaller $N$ except for $N=1,2,3,4,5,6,9$; see \Cref{fig-surplus}.
+  \item The method also verifies the lower bound $t(N)\geq N/3$ for $N=41006$, while the linear programming upper bound \eqref{lp-upper} shows that $t(N) \geq N/3$ fails for all smaller $N$ except for $N=1,2,3,4,5,6,9$; see \Cref{fig-surplus}.
   \item The method establishes the matching lower bound
 \begin{equation}\label{mnt-lower}
 M(N,t) \geq N + 455
